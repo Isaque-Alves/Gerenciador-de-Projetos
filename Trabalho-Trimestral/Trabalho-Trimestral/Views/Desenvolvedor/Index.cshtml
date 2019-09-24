@@ -1,0 +1,44 @@
+﻿<h2>Desenvolvedores cadastrados</h2>
+
+<p>
+    <!-- COLOCAR O IF AQUIIIIIII-->
+    <a asp-controller="desenvolvedor" asp-action="novo" class="btn btn-primary">
+        Cadastrar Desenvolvedor
+    </a>
+</p>
+
+<table class="table table-sm table-hover">
+    <tr>
+        <th>Nome</th>
+        <th>E-mail</th>
+        <th>Administrador</th>
+    </tr>
+
+    @foreach (Desenvolvedor d in ViewBag.Desenvolvedores)
+    {
+        <tr>
+            <td>@d.Nome</td>
+            <td>@d.Email</td>
+            @if(d.Admin == true)
+            {
+                <td>Sim</td>
+            }
+            else
+            {
+                <td>Não</td>
+            }
+            <td>
+                <a asp-controller="desenvolvedor" asp-action="editar" asp-route-id="@d.Id" class="btn btn-sm btn-warning">
+                    Editar
+                </a>
+
+                <a asp-controller="desenvolvedor" asp-action="excluir" asp-route-id="@d.Id" class="btn btn-danger btn-sm">
+                    Excluir
+                </a>
+            </td>
+        </tr>
+
+
+    }
+</table>
+

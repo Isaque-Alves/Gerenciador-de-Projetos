@@ -1,0 +1,46 @@
+﻿<h2>Requisitos cadastrados</h2>
+
+<p>
+    <a asp-controller="requisito" asp-action="novo" class="btn btn-primary">
+        Cadastrar Requisito
+    </a>
+</p>
+
+<table class="table table-sm table-hover">
+    <tr>
+        <th>Data de Cadastro</th>
+        <th>Descrição</th>
+        <th>Observações</th>
+        <th>Data Prevista</th>
+        <th>Funcional</th>
+    </tr>
+
+    @foreach (Requisito r in ViewBag.Requisitos)
+    {
+    <tr>
+        <td>@r.DataCadastro</td>
+        <td>@r.Descricao</td>
+        <td>@r.Observacoes</td>
+        <td>@r.DataPrevista.ToString("dd/MM/yyyy")</td>
+        @if (r.Funcional == true)
+        {
+            <td>Sim</td>
+        }
+        else
+        {
+            <td>Não</td>
+        }
+        <td>
+            <a asp-controller="requisito" asp-action="editar" asp-route-id="@r.Id" class="btn btn-sm btn-warning">
+                Editar
+            </a>
+
+            <a asp-controller="requisito" asp-action="excluir" asp-route-id="@r.Id" class="btn btn-danger btn-sm">
+                Excluir
+            </a>
+        </td>
+    </tr>
+
+
+    }
+</table>
