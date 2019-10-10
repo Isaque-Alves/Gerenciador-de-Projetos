@@ -1,7 +1,51 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
+﻿@model Trabalho_Trimestral.Models.Bug
+@model Trabalho_Trimestral.Models.Requisito
+@using Microsoft.AspNetCore.Http;
+
+<h2>Bugs adicionados</h2>
+
+@if (Context.Session.GetInt32("Administrador") == 1)
+{
+    <p>
+        <a asp-controller="bug" asp-action="novo" class="btn btn-primary">
+            Adicionar um bug
+        </a>
+    </p>
 }
 
-<h1>Index</h1>
+<table class="table table-sm table-hover">
+    <tr>
+        <th>Data de Cadastro</th>
+        <th>Prioridade</th>
+        <th>Criador</th>
+        <th>Ações</th>
+    </tr>
 
+    @foreach (Bug b in ViewBag.Bugs)
+    {
+        @if (!b.Resolucao)
+        {
+            <tr>
+                <td>@b.DataCadastro</td>
+                <td>@b.Prioridade</td>
+                <td>@b.Desenvolvedor</td>
+                <td>
+                    <a asp-controller="desenvolvedor" asp-action="resolver" asp-route-id="@b.Id" class="btn btn-sm btn-success">
+                        Resolver
+                    </a>
+
+                    <a asp-controller="desenvolvedor" asp-action="editar" asp-route-id="@b.Id" class="btn btn-sm btn-warning">
+                        Editar
+                    </a>
+
+                    <a asp-controller="desenvolvedor" asp-action="excluir" asp-route-id="@b.Id" class="btn btn-danger btn-sm">
+                        Excluir
+                    </a>
+                </td>
+
+
+            </tr>
+        }
+
+    }
+</table>

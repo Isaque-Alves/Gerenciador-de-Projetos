@@ -29,7 +29,7 @@ namespace Trabalho_Trimestral.Models
         public bool Funcional { get; set; }
 
         public IEnumerable<Bug> Bugs { get; set; }
-        public IEnumerable<Atribuicao> Atribuicoes { get; set; }
+        public ICollection<Atribuicao> Atribuicoes { get; set; }
         public Projeto Projeto { get; set; }
 
         [NotMapped]

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,7 +28,12 @@ namespace Trabalho_Trimestral.Models
         [Required(ErrorMessage = "Informe")]
         public bool Admin { get; set; }
 
-        public IEnumerable<Bug> Bugs { get; set; }
+        [InverseProperty("Desenvolvedor")]
+        public IEnumerable<Bug> BugsCriados { get; set; }
+
+        [InverseProperty("DesenvolvedorSolucionador")]
+        public IEnumerable<Bug> BugsSolucionados { get; set; }
+
         public IEnumerable<Atribuicao> Atribuicoes { get; set; }
     }
 }

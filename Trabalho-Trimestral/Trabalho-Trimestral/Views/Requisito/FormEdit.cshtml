@@ -15,7 +15,20 @@
         </div>
     </fieldset>
 
-    
+    <div class="form-group form-check">
+        <label for="check"><input asp-for="Resolucao" class="form-check-input" type="checkbox" id="check" />Já foi resolvido</label>
+    </div>
+
+
+    <div class="form-group">
+        <label>Criador</label>
+        <select asp-for="DesenvolvedorId" class="form-control" asp-items="ViewBag.Desenvolvedores">
+            <option></option>
+        </select>
+        <span asp-validation-for="DesenvolvedorId" class="text-danger"></span>
+    </div>
+
+
     <div class="form-group">
         <button type="submit" class="btn btn-primary">
             Salvar

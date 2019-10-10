@@ -21,15 +21,19 @@ namespace Trabalho_Trimestral.Models
         [Required(ErrorMessage ="Informe se ja foi resolvido")]
         public bool Resolucao { get; set; }
 
+        
         public int DesenvolvedorId { get; set; }
 
-        [ForeignKey("Desenvolvedor")]
+
         public int DesenvolvedorSolucionadorId { get; set; }
 
         public int RequisitoId { get; set; }
 
-        public Desenvolvedor Desenvolvedor;
-        public Desenvolvedor DesenvolvedorSolucionador;
-        public Requisito Requisito;
+        [ForeignKey("DesenvolvedorId")]
+        public Desenvolvedor Desenvolvedor { get; set; }
+
+        [ForeignKey("DesenvolvedorSolucionadorId")]
+        public Desenvolvedor DesenvolvedorSolucionador { get; set; }
+        public Requisito Requisito { get; set; }
     }
 }

@@ -35,7 +35,11 @@ namespace Trabalho_Trimestral
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<AppContext>(o => o.UseMySql("Server=localhost;Uid=root;Pwd=ifmgbd;Database=GerenciamentoProjetos"));
-            
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.Cookie.HttpOnly = true;
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +58,7 @@ namespace Trabalho_Trimestral
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseCookiePolicy();
 
             app.UseMvc(routes =>

@@ -4,21 +4,23 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Trabalho_Trimestral.Filtros;
 using Trabalho_Trimestral.Models;
 
 namespace Trabalho_Trimestral.Controllers
 {
     public class HomeController : Controller
     {
+        public HomeController()
+        {
+        }
+        [LoginFilter]
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

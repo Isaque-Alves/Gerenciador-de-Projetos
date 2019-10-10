@@ -15,7 +15,7 @@ namespace Trabalho_Trimestral.Models
         [Required(ErrorMessage ="Informe o tempo gasto")]
         public int TempoGasto { get; set; }
 
-        public Requisito Requisito;
-        public Desenvolvedor Desenvolvedor;
+        public Requisito Requisito { get; set; }
+        public Desenvolvedor Desenvolvedor { get; set; }
     }
 }

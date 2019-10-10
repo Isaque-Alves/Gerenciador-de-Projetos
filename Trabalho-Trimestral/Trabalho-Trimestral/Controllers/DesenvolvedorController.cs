@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Trabalho_Trimestral.Filtros;
 using Trabalho_Trimestral.Models;
 
 namespace Trabalho_Trimestral.Controllers
 {
+    [LoginFilter]
     public class DesenvolvedorController : Controller
     {
         private AppContext Banco;
@@ -22,11 +24,13 @@ namespace Trabalho_Trimestral.Controllers
             return View();
         }
 
+        [LoginFilter(SomenteAdmin = true)]
         public IActionResult Novo()
         {
             return View("Form");
         }
 
+        [LoginFilter(SomenteAdmin = true)]
         [HttpPost]
         public IActionResult Novo(Desenvolvedor desenvolvedor)
         {
@@ -44,6 +48,7 @@ namespace Trabalho_Trimestral.Controllers
             return RedirectToAction("index");
         }
 
+        [LoginFilter(SomenteAdmin = true)]
         public IActionResult Editar(int id)
         {
             Desenvolvedor desenvolvedor = Banco.Desenvolvedores.Find(id);
@@ -56,6 +61,7 @@ namespace Trabalho_Trimestral.Controllers
             return View("Form", desenvolvedor);
         }
 
+        [LoginFilter(SomenteAdmin = true)]
         [HttpPost]
         public IActionResult Editar(Desenvolvedor desenvolvedor)
         {
@@ -73,6 +79,7 @@ namespace Trabalho_Trimestral.Controllers
             return RedirectToAction("index");
         }
 
+        [LoginFilter(SomenteAdmin = true)]
         public IActionResult Excluir(int id)
         {
             Desenvolvedor desenvolvedor = Banco.Desenvolvedores.Find(id);
