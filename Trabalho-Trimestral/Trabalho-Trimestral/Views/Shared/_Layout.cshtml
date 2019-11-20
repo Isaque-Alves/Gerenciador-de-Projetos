@@ -1,9 +1,28 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Trabalho_Trimestral</title>
+
+    <!--=====================================LOGIN==========================================================-->
+    <link rel="icon" type="image/png" href="~/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/css/main.css">
+    <!--===============================================================================================-->
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -13,38 +32,65 @@
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    @if (Context.Session.GetInt32("Id") != null)
+    {
+        <header>
+
+            <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Trabalho trimestral</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Bug" asp-action="Index">Bug</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Desenvolvedor" asp-action="Index">Desenvolvedor</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Projeto" asp-action="Index">Projeto</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Requisito" asp-action="Index">Requisitos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Conta" asp-action="Logout">Sair</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+
+        </header>
+    }
+    else
+    {
+        <nav class="navbar navbar-expand fixed-top navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Trabalho_Trimestral</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand"><b>Trabalho Trimestral</b></a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar3SupportedContent" aria-controls="navbar3SupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+                <div class="collapse navbar-collapse text-center justify-content-end" id="navbar3SupportedContent">
+
                 </div>
             </div>
         </nav>
-    </header>
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    }
+    
+    @RenderBody()
+
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -71,6 +117,22 @@
         </script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <!--=============================================LOGIN==================================================-->
+    <script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/vendor/tilt/tilt.jquery.min.js"></script>
+    <script>
+        $('.js-tilt').tilt({
+            scale: 1.1
+        })
+    </script>
+    <!--===============================================================================================-->
+    <script src="~/js/main.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

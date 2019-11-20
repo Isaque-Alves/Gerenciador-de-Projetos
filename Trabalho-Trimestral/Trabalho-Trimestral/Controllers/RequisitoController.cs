@@ -23,7 +23,7 @@ namespace Trabalho_Trimestral.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.Requisitos = Banco.Requisitos.Include("Atribuicoes").Include("Atribuicoes.Desenvolvedor").OrderBy(c => c.DataCadastro);
+            ViewBag.Requisitos = Banco.Requisitos.Include("Atribuicoes").Include("Atribuicoes.Desenvolvedor").OrderBy(c => c.DataCadastro).OrderBy(o => o.DataPrevista);
             
 
 
@@ -73,7 +73,7 @@ namespace Trabalho_Trimestral.Controllers
         public IActionResult Editar(int id)
         {
             Requisito requisito = Banco.Requisitos.Find(id);
-
+            ViewBag.Desenvolvedores = Banco.Desenvolvedores.OrderBy(d => d.Nome);
             if (requisito == null)
             {
                 return RedirectToAction("index");

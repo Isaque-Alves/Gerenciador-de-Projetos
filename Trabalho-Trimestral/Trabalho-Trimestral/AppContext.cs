@@ -19,5 +19,10 @@ namespace Trabalho_Trimestral
         {
 
         }
+        protected override void OnModelCreating(ModelBuilder modelBuider)
+        {
+            modelBuider.Entity<Bug>().Property(b => b.DesenvolvedorSolucionadorId).IsRequired(false);
+            base.OnModelCreating(modelBuider);
+        }
     }
 }

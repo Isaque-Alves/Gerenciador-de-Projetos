@@ -11,7 +11,7 @@ namespace Trabalho_Trimestral.Models
     {
         public int Id { get; set; }
 
-        
+
         public DateTime DataCadastro { get; set; } = DateTime.Now;
 
         [Required(ErrorMessage = "Informe a descrição")]
@@ -22,7 +22,7 @@ namespace Trabalho_Trimestral.Models
         public string Observacoes { get; set; }
 
         [Required(ErrorMessage = "Informe a data prevista")]
-        [DataType(DataType.Date,ErrorMessage = "Informe a data prevista")]
+        [DataType(DataType.Date, ErrorMessage = "Informe a data prevista")]
         public DateTime DataPrevista { get; set; }
 
         [Required(ErrorMessage = "Informe o tipo")]
@@ -34,5 +34,36 @@ namespace Trabalho_Trimestral.Models
 
         [NotMapped]
         public int[] Desenvolvedores { get; set; }
+
+        public int TempoGastoo()
+        {
+            int dias = 0;
+
+            if (DataCadastro < DataPrevista)
+            {
+                dias = (DataPrevista.Day - DataCadastro.Day) + (DataPrevista.Month - DataCadastro.Month) * 30 + (DataPrevista.Year - DataCadastro.Year) * 360;
+            }
+
+
+
+
+            return dias;
+        }
+
+        public int TempoGasto => (int) DataPrevista.Subtract(DataCadastro).TotalDays;
+
+        public static int ComparaDatas(Requisito r1, Requisito r2)
+        {
+            if (r1.TempoGasto < r2.TempoGasto)
+            {
+                return 1;
+            }
+            else if (r1.TempoGasto == r2.TempoGasto)
+            {
+                return 0;
+            }
+
+            return -1;
+        }
     }
 }

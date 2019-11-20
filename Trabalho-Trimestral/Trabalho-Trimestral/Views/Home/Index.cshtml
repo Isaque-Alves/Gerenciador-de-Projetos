@@ -1,8 +1,59 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Trabalho_Trimestral.Models.Bug
+@{
+    bool PrimeiraVez;
 }
+<div class="container" style="margin-top: 80px;">
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h2>Listagem dos Bugs </h2>
+
+    <table class="table table-sm table-hover">
+        <tr>
+            <th>Requisito</th>
+            <th>Prioridade</th>
+            <th>Data de Registro</th>
+        </tr>
+
+
+        @foreach (Requisito r in ViewBag.RequisitosBugs)
+        {
+            PrimeiraVez = true;
+
+            @foreach (Bug b in r.Bugs)
+            {
+                if (!b.Resolucao)
+                {
+                    <tr>
+                        @if (PrimeiraVez)
+                        {
+                            <td rowspan="@r.Bugs.Count()">@r.Descricao</td>
+                            PrimeiraVez = false;
+                        }
+                        <td>@b.Prioridade</td>
+                        <td>@b.DataCadastro.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                    }
+                }
+
+            }
+    </table>
+    <hr />
+
+    <h2>Listagem dos Requisitos</h2>
+
+    <table class="table table-sm table-hover">
+        <tr>
+            <th>Data de Entrega</th>
+            <th>Tempo Gasto</th>
+        </tr>
+
+        @foreach (Requisito r in ViewBag.Requisitos)
+        {
+            <tr>
+                <td>@r.DataPrevista.ToString("dd/MM/yyyy")</td>
+                <td>@r.TempoGasto dias</td>
+
+            </tr>
+        }
+    </table>
+
 </div>

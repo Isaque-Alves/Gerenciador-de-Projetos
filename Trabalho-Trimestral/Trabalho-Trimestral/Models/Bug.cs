@@ -14,7 +14,10 @@ namespace Trabalho_Trimestral.Models
         [Required(ErrorMessage ="Informe a prioridade")]
         [StringLength(50)]
         public string Prioridade { get; set; }
-        
+
+        [Required(ErrorMessage = "Informe a descrição")]
+        [StringLength(200)]
+        public string Descricao { get; set; }
 
         public DateTime DataCadastro { get; set; } = DateTime.Now;
 
@@ -25,7 +28,7 @@ namespace Trabalho_Trimestral.Models
         public int DesenvolvedorId { get; set; }
 
 
-        public int DesenvolvedorSolucionadorId { get; set; }
+        public int? DesenvolvedorSolucionadorId { get; set; }
 
         public int RequisitoId { get; set; }
 
@@ -34,6 +37,9 @@ namespace Trabalho_Trimestral.Models
 
         [ForeignKey("DesenvolvedorSolucionadorId")]
         public Desenvolvedor DesenvolvedorSolucionador { get; set; }
+
         public Requisito Requisito { get; set; }
+
+        
     }
 }

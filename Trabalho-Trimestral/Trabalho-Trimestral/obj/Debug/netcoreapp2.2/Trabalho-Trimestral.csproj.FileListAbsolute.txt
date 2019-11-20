@@ -37,4 +37,4 @@ C:\Users\isaque.alves\source\repos\Trabalho-Trimestral\Trabalho-Trimestral\obj\D
 C:\Users\isaque.alves\source\repos\Trabalho-Trimestral\Trabalho-Trimestral\obj\Debug\netcoreapp2.2\Razor\Views\Requisito\Index.g.cshtml.cs
 C:\Users\isaque.alves\source\repos\Trabalho-Trimestral\Trabalho-Trimestral\obj\Debug\netcoreapp2.2\Razor\Views\Requisito\Form.g.cshtml.cs
 C:\Users\isaque.alves\source\repos\Trabalho-Trimestral\Trabalho-Trimestral\obj\Debug\netcoreapp2.2\Razor\Views\Conta\Login.g.cshtml.cs
-C:\Users\isaque.alves\source\repos\Trabalho-Trimestral\Trabalho-Trimestral\obj\Debug\netcoreapp2.2\Razor\Views\Requisito\FormEdit.g.cshtml.cs
+C:\Users\isaque.alves\source\repos\Trabalho-Trimestral\Trabalho-Trimestral\obj\Debug\netcoreapp2.2\Razor\Views\Bug\FormEdit.g.cshtml.cs

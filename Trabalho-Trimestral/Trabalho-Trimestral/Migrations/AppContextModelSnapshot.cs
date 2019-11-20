@@ -44,9 +44,13 @@ namespace Trabalho_Trimestral.Migrations
 
                     b.Property<DateTime>("DataCadastro");
 
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
                     b.Property<int>("DesenvolvedorId");
 
-                    b.Property<int>("DesenvolvedorSolucionadorId");
+                    b.Property<int?>("DesenvolvedorSolucionadorId");
 
                     b.Property<string>("Prioridade")
                         .IsRequired()
@@ -140,12 +144,12 @@ namespace Trabalho_Trimestral.Migrations
 
             modelBuilder.Entity("Trabalho_Trimestral.Models.Atribuicao", b =>
                 {
-                    b.HasOne("Trabalho_Trimestral.Models.Desenvolvedor")
+                    b.HasOne("Trabalho_Trimestral.Models.Desenvolvedor", "Desenvolvedor")
                         .WithMany("Atribuicoes")
                         .HasForeignKey("DesenvolvedorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Trabalho_Trimestral.Models.Requisito")
+                    b.HasOne("Trabalho_Trimestral.Models.Requisito", "Requisito")
                         .WithMany("Atribuicoes")
                         .HasForeignKey("RequisitoId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -160,10 +164,9 @@ namespace Trabalho_Trimestral.Migrations
 
                     b.HasOne("Trabalho_Trimestral.Models.Desenvolvedor", "DesenvolvedorSolucionador")
                         .WithMany("BugsSolucionados")
-                        .HasForeignKey("DesenvolvedorSolucionadorId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("DesenvolvedorSolucionadorId");
 
-                    b.HasOne("Trabalho_Trimestral.Models.Requisito")
+                    b.HasOne("Trabalho_Trimestral.Models.Requisito", "Requisito")
                         .WithMany("Bugs")
                         .HasForeignKey("RequisitoId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -172,7 +175,7 @@ namespace Trabalho_Trimestral.Migrations
             modelBuilder.Entity("Trabalho_Trimestral.Models.Requisito", b =>
                 {
                     b.HasOne("Trabalho_Trimestral.Models.Projeto", "Projeto")
-                        .WithMany("Requisitos")
+                        .WithMany("Resquisitos")
                         .HasForeignKey("ProjetoId");
                 });
 #pragma warning restore 612, 618

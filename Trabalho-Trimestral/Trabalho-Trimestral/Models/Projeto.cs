@@ -18,10 +18,10 @@ namespace Trabalho_Trimestral.Models
         
         public DateTime DataEntrega { get; set; } = DateTime.Now;
 
-        [Required(ErrorMessage = "Informe o Soolicitante")]
+        [Required(ErrorMessage = "Informe o Solicitante")]
         [StringLength(200)]
         public string Solicitante { get; set; }
 
-        public IEnumerable<Requisito> Requisitos { get; set; }
+        public IEnumerable<Requisito> Resquisitos { get; set; }
     }
 }

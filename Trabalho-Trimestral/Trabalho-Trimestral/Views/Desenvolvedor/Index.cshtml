@@ -1,44 +1,58 @@
-﻿<h2>Desenvolvedores cadastrados</h2>
+﻿@using Microsoft.AspNetCore.Http;
 
-<p>
-    <!-- COLOCAR O IF AQUIIIIIII-->
-    <a asp-controller="desenvolvedor" asp-action="novo" class="btn btn-primary">
-        Cadastrar Desenvolvedor
-    </a>
-</p>
+<div class="container">
+    <center style="margin-top: 80px;">
+        <h2>Desenvolvedores cadastrados</h2>
 
-<table class="table table-sm table-hover">
-    <tr>
-        <th>Nome</th>
-        <th>E-mail</th>
-        <th>Administrador</th>
-    </tr>
-
-    @foreach (Desenvolvedor d in ViewBag.Desenvolvedores)
-    {
+        @if (Context.Session.GetInt32("Administrador") == 1)
+        {
+            <p>
+                <a asp-controller="desenvolvedor" asp-action="novo" class="btn btn-primary">
+                    Cadastrar Desenvolvedor
+                </a>
+            </p>
+        }
+    </center>
+    <table class="table table-sm table-hover">
         <tr>
-            <td>@d.Nome</td>
-            <td>@d.Email</td>
-            @if(d.Admin == true)
-            {
-                <td>Sim</td>
-            }
-            else
-            {
-                <td>Não</td>
-            }
-            <td>
-                <a asp-controller="desenvolvedor" asp-action="editar" asp-route-id="@d.Id" class="btn btn-sm btn-warning">
-                    Editar
-                </a>
-
-                <a asp-controller="desenvolvedor" asp-action="excluir" asp-route-id="@d.Id" class="btn btn-danger btn-sm">
-                    Excluir
-                </a>
-            </td>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Administrador</th>
         </tr>
 
+        @foreach (Desenvolvedor d in ViewBag.Desenvolvedores)
+        {
+            <tr>
+                <td>@d.Nome</td>
+                <td>@d.Email</td>
+                @if (d.Admin == true)
+                {
+                    <td>Sim</td>
+                }
+                else
+                {
+                    <td>Não</td>
+                }
+                <td>
+                    @if (Context.Session.GetInt32("Administrador") == 1)
+                    {
+                        <a asp-controller="desenvolvedor" asp-action="editar" asp-route-id="@d.Id" class="btn btn-sm btn-warning">
+                            Editar
+                        </a>
 
-    }
-</table>
+                        <a asp-controller="desenvolvedor" asp-action="excluir" asp-route-id="@d.Id" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Tem certeza que deseja ecluir o componente?');">
+                            Excluir
+                        </a>
+                    }
+                </td>
+            </tr>
+
+
+        }
+    </table>
+</div>
+
+
+
 

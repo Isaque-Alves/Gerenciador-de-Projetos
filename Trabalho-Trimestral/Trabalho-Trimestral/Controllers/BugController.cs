@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Trabalho_Trimestral.Filtros;
 using Trabalho_Trimestral.Models;
+using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 
 namespace Trabalho_Trimestral.Controllers
 {
@@ -30,7 +32,7 @@ namespace Trabalho_Trimestral.Controllers
 
         public IActionResult Novo()
         {
-
+           
             return View("Form");
         }
 
@@ -39,7 +41,8 @@ namespace Trabalho_Trimestral.Controllers
         {
             if (ModelState.IsValid)
             {
-                bug.DesenvolvedorId = bug.Id;
+                bug.DesenvolvedorId = HttpContext.Session.GetInt32("Id")??0;
+                bug.Resolucao = false;
                 Banco.Bugs.Add(bug);
                 Banco.SaveChanges();
             }
@@ -54,17 +57,13 @@ namespace Trabalho_Trimestral.Controllers
 
         public IActionResult Editar(int id)
         {
-
             Bug bug = Banco.Bugs.Find(id);
-
-
-
             if (bug == null)
             {
                 return RedirectToAction("index");
             }
 
-            return View("FormEdit", bug);
+            return View("Form", bug);
         }
 
         [HttpPost]
@@ -72,14 +71,13 @@ namespace Trabalho_Trimestral.Controllers
         {
             if (ModelState.IsValid)
             {
+                bug.DesenvolvedorId = HttpContext.Session.GetInt32("Id") ?? 0;
                 Banco.Bugs.Update(bug);
                 Banco.SaveChanges();
             }
             else
             {
-
-
-                return View("FormEdit", bug);
+                return View("Form", bug);
             }
 
 
@@ -104,6 +102,7 @@ namespace Trabalho_Trimestral.Controllers
         public IActionResult Resolver(int id)
         {
             Bug bug = Banco.Bugs.Find(id);
+            bug.DesenvolvedorSolucionadorId = HttpContext.Session.GetInt32("Id") ?? 0;
             bug.Resolucao = true;
             Banco.Bugs.Update(bug);
             Banco.SaveChanges();
